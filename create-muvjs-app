@@ -99,4 +99,6 @@ echo "<!DOCTYPE html>
 
 </html>" > index.html
 
-echo "Now run `cd $app`"
+echo "Now run:"
+echo "  cd $app"
+echo "  npm start"

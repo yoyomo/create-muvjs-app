@@ -1,0 +1,102 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: create-muvjs-app my-app"
+  exit 1;
+fi
+
+app=$@
+
+mkdir $app
+cd $app
+echo "const express = require('express');
+const app = express();
+const http = require('http').createServer(app);
+const path = require('path');
+
+app.use(express.static(__dirname + '/'));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname , 'index.html'));
+});
+
+PORT = 3000;
+http.listen(PORT, () => {
+  console.log('To view your app, open this link in your browser: http://localhost:' + PORT);
+});" > server.js
+
+npm init -f
+npm install express
+npm install http
+npm install muvjs
+
+echo "'use strict';
+
+import {button, div} from './node_modules/muvjs/muv-dom.js';
+
+// MODEL
+
+export const init =
+  {
+    count: 0
+  };
+
+// UPDATE
+
+const Increment = 'increment';
+const Decrement = 'decrement';
+const Reset = 'reset';
+
+export const update = model => action => {
+  switch (action) {
+    case Increment:
+      model = {...model};
+      model.count = model.count + 1;
+      break;
+
+    case Decrement:
+      model = {...model};
+      model.count = model.count - 1;
+      break;
+
+    case Reset:
+      model = {...model};
+      model.count = 0;
+  }
+  return model;
+};
+
+// VIEW
+
+export const view = dispatch => model =>
+  div()(
+    [
+      , button({onclick: dispatch(Decrement)})('-')
+      , div()(model.count)
+      , button({onclick: dispatch(Increment)})('+')
+      , button({onclick: dispatch(Reset)})('Reset')
+    ]
+  );
+
+" > App.js
+
+echo "'use strict';
+
+import {muv} from './node_modules/muvjs/muv.js';
+import {init, update, view} from './App.js';
+
+muv(init)(update)(view)('root');" > index.js
+
+echo "<!DOCTYPE html>
+<html>
+
+<body>
+  
+<div id='root'></div>
+<script type='module' src='./index.js'></script>
+
+</body>
+
+</html>" > index.html
+
+echo "Now run `cd $app`"

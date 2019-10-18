@@ -1,6 +1,6 @@
 {
   "name": "create-muvjs-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "brew installed command to create a MuvJS app",
   "main": "create-muvjs-app.js",
   "author": "",

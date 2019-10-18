@@ -1,0 +1,12 @@
+{
+  "name": "create-muvjs-app",
+  "version": "1.0.0",
+  "description": "brew installed command to create a MuvJS app",
+  "main": "create-muvjs-app.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "util": "^0.12.1"
+  }
+}

@@ -8,5 +8,5 @@ brew installed command to create a MuvJS app
 
 ## How to use
 `create-muvjs-app my-app`\
-`cd my-app`
+`cd my-app`\
 `npm start`

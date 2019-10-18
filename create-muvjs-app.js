@@ -10,7 +10,7 @@ async function createMuvJSApp() {
 	let stdout;
 	let stderr;
 	try{
-		({stdout, stderr } = await exec(`./create-muvjs-app ${app}`));
+		({stdout, stderr } = await exec(`sh create-muvjs-app ${app}`));
 
 	}catch(e){
 		stderr = e.stderr;

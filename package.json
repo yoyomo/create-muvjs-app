@@ -5,6 +5,9 @@
   "main": "create-muvjs-app.js",
   "author": "",
   "license": "ISC",
+  "bin": {
+    "create-muvjs-app": "./create-muvjs-app.js"
+  },
   "dependencies": {
     "child_process": "^1.0.2",
     "util": "^0.12.1"

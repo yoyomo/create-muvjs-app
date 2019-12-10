@@ -1,17 +1,35 @@
 #!/bin/bash
 
+usage="Usage: create-muvjs-app my-app [--typescript]"
 if [ "$#" -lt 1 ]; then
-  echo "Usage: create-muvjs-app my-app"
-  exit 1;
+	echo $usage
+	exit 1;
 fi
 
-app=$@
+app=$1
+option=$2
+
+if [ "$option" != "" ]; then
+	if [ "$option" = "--typescript" ]; then
+		echo Using typescript
+	else
+		echo "Unknown option $option"
+		echo $usage
+		exit 1;
+	fi
+fi
 
 git clone https://github.com/yoyomo/muvjs-example $app
 cd $app
+
+if [ "$option" = "--typescript" ]; then
+	git checkout ts
+fi
+
 git remote rm origin
+rm -rf .git .gitignore
 npm install
 
 echo "Now run:"
 echo "  cd $app"
-echo "  npm start"
+echo "  npm dev"
